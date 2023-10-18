@@ -2,6 +2,7 @@
 
 use std::env;
 use std::fs;
+use std::process;
 
 // Split your program into a main.rs and a lib.rs and move your program’s logic to lib.rs.
 // As long as your command line parsing logic is small, it can remain in main.rs.
@@ -9,7 +10,10 @@ use std::fs;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let config = Config::new(&args);
+    let config = Config::build(&args).unwrap_or_else(|err| {
+        println!("Problem parsing arguments: {err}");
+        process::exit(1);
+    });
 
     println!("Searching for {}", config.query);
     println!("In file {}", config.file_path);
@@ -26,10 +30,13 @@ struct Config {
 }
 
 impl Config {
-    fn new(args: &[String]) -> Self {
+    fn build(args: &[String]) -> Result<Self, &'static str> {
+        if args.len() < 3 {
+            return Err("not enough arguments");
+        }
         let query = args[1].clone();
         let file_path = args[2].clone();
 
-        Self { query, file_path }
+        Ok(Self { query, file_path })
     }
 }
