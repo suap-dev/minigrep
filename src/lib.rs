@@ -20,7 +20,10 @@ impl Config {
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
-    println!("With text:\n{contents}");
-
     Ok(())
 }
+
+// Write a test that fails and run it to make sure it fails for the reason you expect.
+// Write or modify just enough code to make the new test pass.
+// Refactor the code you just added or changed and make sure the tests continue to pass.
+// Repeat from step 1!
