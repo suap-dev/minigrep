@@ -39,25 +39,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-// Write a test that fails and run it to make sure it fails for the reason you expect.
-// Write or modify just enough code to make the new test pass.
-// Refactor the code you just added or changed and make sure the tests continue to pass.
-// Repeat from step 1!
-
-// fn search(query: &str, contents: &str) -> Vec<String> {
-//     for line in contents.lines() {
-//         if line.contains(query) {}
-//     }
-//     vec!["no".to_owned()]
-// }
-
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    // for line in contents.lines() {
-    //     if line.contains(query) {
-    //         results.push(line);
-    //     }
-    // }
-
     contents
         .lines()
         .filter(|line| line.contains(query))
