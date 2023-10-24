@@ -11,10 +11,10 @@ use minigrep::Config;
 // with one set to case sensitive and one set to ignore case.
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let ignore_case = env::var("IGNORE_CASE").is_ok();
-
-    let config = Config::build(&args, ignore_case).unwrap_or_else(|err| {
+    let ignore_case = env::var("IGNORE_CASE").is_ok();    
+    let args = env::args();
+    
+    let config = Config::build(args, ignore_case).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {err}");
         process::exit(1);
     });
